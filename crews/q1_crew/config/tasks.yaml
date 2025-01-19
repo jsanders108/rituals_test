@@ -1,0 +1,120 @@
+q1_quantitative_task:
+  description: >
+    The following survey question (Q1) was asked to a group of respondents:
+
+    {q1_question_text}
+
+    Below are all the individual responses to the survey question, in json format:
+
+    {q1_data}
+
+    The numerical ratings are stored under the 'rating score' key.
+
+    Your task is to use the **Q1_QuantAnalysisTool** to calculate summary statistics for the 'rating score' values. 
+    Focus exclusively on the numerical data paired with this key, following the tool's instructions. 
+    Do not write or modify any code yourself.
+
+  expected_output: >
+    Provide a detailed summary and analysis of the 'rating score' values, including:
+
+    1. Overall Statistics:
+       - Total number of respondents
+       - Mean rating score
+       - Median rating score
+       - Percentage of respondents who rated between 1-5
+       - Percentage of respondents who rated between 6-8
+       - Percentage of respondents who rated between 9-10
+       - List of individual 'rating score' values (e.g., [8, 6, 10, 7, 3, 6, 8 ...])
+
+  agent: q1_quantitative_analyst
+
+
+q1_qualitative_task:
+  description: >
+    The following survey question (Q1) was asked to a group of respondents:
+
+    {q1_question_text}
+
+    Below are all the individual responses to the survey question, in json format:
+
+    {q1_data}
+
+    The explanations for answers are stored under the 'reason for score' key.
+
+    **Task 1:** Analyze and summarize the 'reason for score' qualitative data:
+    1. Identify three key findings from the responses, with one impactful quote supporting each finding.
+    2. Provide a summary of the positive and negative feedback from the respondents.
+
+    The data below contains additional aggregated feedback:
+    - Positive explanations are categorized, tabulated, ranked, and stored under the 'positive reasons' and 'count' keys.
+    - Negative explanations are categorized, tabulated, ranked, and stored under the 'negative reasons' and 'count' keys.
+
+    Here is the data:
+    {q1_reasons}
+
+    **Task 2:** Create two tables summarizing the positive and negative reasons:
+    1. A table summarizing the positive reasons, including:
+       - The name of each reason.
+       - The count of mentions for each reason.
+    2. A table summarizing the negative reasons, including:
+       - The name of each reason.
+       - The count of mentions for each reason.
+
+  expected_output: >
+    **Comprehensive qualitative analysis of the 'reason for score' data, including:**
+    1. Three key findings with impactful quotes supporting each finding.
+    2. A summary of the positive and negative feedback.
+
+    **Additional Deliverables:**
+    - A table summarizing the positive reasons.
+    - A table summarizing the negative reasons.
+
+  agent: q1_qualitative_analyst
+
+
+q1_report_task:
+  description: >
+    The survey question analyzed was:
+
+    "After viewing these advertisements, what score would you give the Rituals campaign 
+    as a whole, from 1 (very poor) to 10 (excellent)? Please explain your answer."
+
+    Your task is to create a professional, comprehensive report in markdown format that integrates
+    the findings from the **q1_quantitative_task** and **q1_qualitative_task** into a cohesive narrative.
+
+    **Task Details:**
+    - **Analyze and Synthesize Findings:**
+      - Integrate quantitative results (e.g., summary statistics, score distributions) into the narrative.
+      - Summarize qualitative insights from the 'reason for score' field, focusing on key findings, themes, 
+        and impactful quotes.
+    - **Structure the Report:** Ensure the report includes the following clearly defined sections:
+      1. **Executive Summary:** A concise overview of the key insights from both the quantitative and qualitative analyses.
+           Be sure to recap the question being analyzed.
+      2. **Quantitative Analysis:** Summarize statistical findings, including:
+         - Mean and median scores.
+         - Score distributions (1-5, 6-8, 9-10) with percentages.
+         - List of individual 'rating score' values (e.g., [8, 6, 10, 7, 3, 6, 8 ...])
+         - Tables or lists for clarity where appropriate.
+      3. **Qualitative Analysis:** Provide a thematic analysis of the 'reason for score' data, including:
+         - Three key findings supported by impactful quotes.
+         - A summary of positive and negative feedback themes.
+         - Summarized counts of positive and negative reasons.
+      4. **Key Insights and Recommendations:** 
+         - Draw connections between the quantitative and qualitative findings.
+         - Offer actionable recommendations based on the combined analysis.
+
+    **Additional Requirements:**
+    - Ensure the report adheres to a professional tone, is polished, and is audience-appropriate.
+    - Use markdown formatting for headings, tables, and lists to ensure readability.
+    - Don't use '```' for code blocks.
+    - Don't add extra commentary at the end of the report, such as "This report provides...".
+
+  expected_output: >
+    A well-structured markdown report that:
+    - Provides a clear narrative integrating quantitative and qualitative findings.
+    - Includes all specified sections with accurate, visually supported insights (e.g., tables, lists).
+    - Maintains a professional tone and polished presentation.
+  
+  agent: q1_report_writer
+  context: [q1_quantitative_task, q1_qualitative_task]
+
