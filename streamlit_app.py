@@ -14,7 +14,7 @@ q1_data_file = st.file_uploader("Upload q1_data JSON File:", type="json")
 q1_reasons_file = st.file_uploader("Upload q1_reasons JSON File:", type="json")
 
 # API URL
-API_URL = "http://127.0.0.1:8000/run-analysis/"
+API_URL = "http://ritualstestfastapi-production.up.railway.app"
 
 # Process Data Button
 if st.button("Run Analysis"):
